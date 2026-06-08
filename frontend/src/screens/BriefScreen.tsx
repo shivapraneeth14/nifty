@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Clock, Sun, Moon, TrendingUp, TrendingDown, Minus } from 'lucide-react'
+import { Clock, Sun, Moon } from 'lucide-react'
 import { useBrief } from '../hooks/useBrief'
 import { useTheme } from '../config/theme'
 import SentimentBadge from '../components/ui/SentimentBadge'
@@ -21,57 +21,30 @@ const INDEX_OPTIONS = [
   { label: 'Bank Nifty', value: 'banknifty' },
 ]
 
-function MarketCallBanner({ sentiment, accuracy, tradeAction, indexLabel, indexShort, index }: {
+function MarketCallBanner({ sentiment, accuracy, index }: {
   sentiment: string
   accuracy?: { nifty: { last_10: number; count: number }; banknifty: { last_10: number; count: number } }
-  tradeAction?: string
-  indexLabel: string
-  indexShort: string
   index: string
 }) {
   const isNifty = index === 'nifty'
   const isBullish = sentiment === 'bullish'
   const isBearish = sentiment === 'bearish'
   const bgColor = isBullish ? 'bg-green-500' : isBearish ? 'bg-red-500' : 'bg-amber-500'
-  const Icon = isBullish ? TrendingUp : isBearish ? TrendingDown : Minus
+  const textColor = isBullish ? 'text-green-500' : isBearish ? 'text-red-500' : 'text-amber-500'
   const emoji = isBullish ? '📈' : isBearish ? '📉' : '⚪'
-  const action = isBullish ? `BUY ${indexShort.toUpperCase()} CALLS / SELL PUTS` : isBearish ? `BUY ${indexShort.toUpperCase()} PUTS / SELL CALLS` : 'RANGE TRADE / WAIT'
   const idxAcc = isNifty ? accuracy?.nifty : accuracy?.banknifty
-  const accText = idxAcc && idxAcc.count > 0 ? `${idxAcc.last_10}% (${idxAcc.count} days)` : 'No data yet'
+  const accText = idxAcc && idxAcc.count > 0 ? `${idxAcc.last_10}% acc (${idxAcc.count} days)` : ''
 
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ type: 'spring', stiffness: 300 }}
-      className={`rounded-xl border ${bgColor}/20 bg-gradient-to-br ${bgColor}/5 overflow-hidden`}
+      className={`rounded-2xl ${bgColor} ${bgColor}/90 text-white text-center py-5 px-4`}
     >
-      <div className="p-4 space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className={`w-10 h-10 rounded-xl ${bgColor} flex items-center justify-center shadow-lg`}>
-              <Icon size={20} className="text-white" />
-            </div>
-            <div>
-              <div className="text-lg font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
-                {emoji} {indexLabel}: {sentiment.toUpperCase()}
-              </div>
-              <div className="text-xs text-gray-400 dark:text-gray-500">
-                Suggested: <span className="font-medium text-gray-700 dark:text-gray-300">{action}</span>
-              </div>
-            </div>
-          </div>
-          <div className="text-right">
-            <div className={`text-2xl font-bold font-mono ${isBullish ? 'text-green-500' : isBearish ? 'text-red-500' : 'text-amber-500'}`}>{emoji}</div>
-            <div className="text-[10px] text-gray-400 mt-0.5">Accuracy: {accText}</div>
-          </div>
-        </div>
-        {tradeAction && (
-          <div className="rounded-lg bg-gray-900/5 dark:bg-white/5 px-3 py-2">
-            <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">{tradeAction}</p>
-          </div>
-        )}
-      </div>
+      <div className="text-4xl mb-1">{emoji}</div>
+      <div className="text-2xl font-bold tracking-wide">{sentiment.toUpperCase()}</div>
+      {accText && <div className="text-xs mt-1 opacity-80">{accText}</div>}
     </motion.div>
   )
 }
@@ -94,7 +67,6 @@ export default function BriefScreen() {
   const currentSentiment = isNifty ? (brief.sentiment_nifty || brief.overall_sentiment) : (brief.sentiment_banknifty || brief.overall_sentiment)
   const currentItems = isNifty ? (brief.items_nifty || brief.items) : (brief.items_banknifty || brief.items)
   const currentSummary = isNifty ? (brief.summary_nifty || brief.summary_text) : (brief.summary_banknifty || brief.summary_text)
-  const currentTradeAction = isNifty ? brief.trade_action_nifty : brief.trade_action_banknifty
   const currentHistSummary = isNifty ? brief.historical_summary_nifty : brief.historical_summary_banknifty
   const currentKeyLevels = isNifty ? (brief.key_levels_nifty || brief.key_levels) : (brief.key_levels_banknifty || brief.key_levels)
 
@@ -118,9 +90,6 @@ export default function BriefScreen() {
       <MarketCallBanner
         sentiment={currentSentiment}
         accuracy={brief.accuracy}
-        tradeAction={currentTradeAction}
-        indexLabel={indexLabel}
-        indexShort={indexShort}
         index={index}
       />
 
