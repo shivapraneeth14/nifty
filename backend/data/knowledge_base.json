@@ -1,0 +1,307 @@
+{
+  "RBI": {
+    "name": "RBI Monetary Policy Decision",
+    "modifiers": {
+      "hold": {
+        "direction": "positive",
+        "chain": [
+          "RBI is India's central bank — it controls how much it costs for banks to borrow money",
+          "REPO RATE = the interest rate RBI charges when banks borrow from it",
+          "When RBI HOLDS the rate → banks' borrowing costs STAY THE SAME",
+          "Same cost for banks → they don't increase loan EMIs for customers",
+          "No EMI increase → you keep spending on houses, cars, and goods",
+          "People spending → companies earn more profits → stock prices go UP 📈"
+        ],
+        "sectors": {
+          "Banking": "⭐ Direct: stable NIMs benefit HDFC Bank, ICICI Bank, SBI",
+          "Auto": "✅ Positive: stable loan EMIs means car buying continues",
+          "Real Estate": "✅ Positive: home loan rates unchanged, supports buying"
+        },
+        "stocks": ["HDFCBANK", "ICICIBANK", "SBIN", "MARUTI", "BAJFINANCE"]
+      },
+      "cut": {
+        "direction": "positive",
+        "chain": [
+          "RBI is India's central bank",
+          "When RBI CUTS the REPO RATE → it becomes CHEAPER for banks to borrow",
+          "Lower cost for banks → they reduce loan interest rates for customers",
+          "Cheaper EMIs → you borrow more for houses, cars, and businesses",
+          "More borrowing → more spending → more profits for companies",
+          "Companies grow → stock market goes UP 📈"
+        ],
+        "sectors": {
+          "Banking": "⭐ Direct: lower cost of funds, positive for all banks",
+          "Auto": "✅ Strong: cheaper car loans drive sales",
+          "Real Estate": "✅ Strong: lower home loan rates boost demand",
+          "NBFCs": "✅ Positive: lower borrowing costs improve margins"
+        },
+        "stocks": ["HDFCBANK", "ICICIBANK", "SBIN", "MARUTI", "BAJFINANCE", "M&M"]
+      },
+      "hike": {
+        "direction": "negative",
+        "chain": [
+          "RBI is India's central bank",
+          "When RBI HIKES the REPO RATE → it becomes MORE EXPENSIVE for banks to borrow",
+          "Higher cost for banks → they increase loan interest rates for customers",
+          "More expensive EMIs → you borrow less for houses, cars, and businesses",
+          "Less borrowing → less spending → companies earn less profit",
+          "Company profits fall → stock market goes DOWN 📉"
+        ],
+        "sectors": {
+          "Banking": "⭐ Direct: may benefit from higher NIMs but loan growth slows",
+          "Auto": "🔴 Negative: expensive car loans reduce demand",
+          "Real Estate": "🔴 Negative: high home loan rates reduce buying"
+        },
+        "stocks": ["HDFCBANK", "ICICIBANK", "SBIN", "MARUTI", "BAJFINANCE"]
+      }
+    }
+  },
+  "FED": {
+    "name": "US Federal Reserve Rate Decision",
+    "modifiers": {
+      "cut": {
+        "direction": "positive",
+        "chain": [
+          "The US Federal Reserve is America's central bank — like RBI for the USA",
+          "When US Fed CUTS rates → money becomes CHEAPER in the US",
+          "Cheaper money in US → investors look for higher returns in other countries",
+          "Foreign investors put money into Indian stock market (FII inflows)",
+          "More money flowing into India → Nifty goes UP 📈"
+        ],
+        "sectors": {
+          "IT": "⭐ Direct: weaker USD means higher revenue for Indian IT exports",
+          "Metals": "✅ Positive: global demand increases",
+          "Banking": "✅ Positive: FII inflows boost banking stocks"
+        },
+        "stocks": ["INFY", "TCS", "HCLTECH", "HINDALCO", "TATASTEEL"]
+      },
+      "hold": {
+        "direction": "neutral",
+        "chain": [
+          "US Federal Reserve kept rates unchanged — no change in global money flows",
+          "Markets already expected this decision, so no major impact expected",
+          "Focus shifts to Fed's future guidance for the next signal"
+        ],
+        "sectors": {},
+        "stocks": []
+      },
+      "hike": {
+        "direction": "negative",
+        "chain": [
+          "US Federal Reserve HIKED rates → money becomes MORE EXPENSIVE in the US",
+          "US investors keep money in US (higher returns available there)",
+          "Foreign investors SELL Indian stocks and take money back to US (FII outflows)",
+          "FII selling → Nifty goes DOWN 📉"
+        ],
+        "sectors": {
+          "IT": "⭐ Direct: stronger USD was helping but rate hikes slow global economy",
+          "Metals": "🔴 Negative: global slowdown reduces demand",
+          "All": "⚠️ Broad negative impact across sectors"
+        },
+        "stocks": ["INFY", "TCS", "HCLTECH"]
+      }
+    }
+  },
+  "CPI": {
+    "name": "India CPI Inflation Data",
+    "modifiers": {
+      "above_estimate": {
+        "direction": "negative",
+        "chain": [
+          "CPI = Consumer Price Index — it measures how much prices of everyday things have gone up",
+          "When CPI comes ABOVE expectations → prices rose more than expected",
+          "Higher inflation → people's money buys less → they spend less",
+          "RBI also worries about high inflation → may KEEP rates high",
+          "Both effects combined → negative for stock market 📉"
+        ],
+        "sectors": {
+          "Banking": "⚠️ Mixed: high inflation may delay RBI rate cuts",
+          "Consumer Goods": "🔴 Negative: people buy less when prices are high",
+          "FMCG": "🔴 Negative: input costs rise, demand falls"
+        },
+        "stocks": ["HINDUNILVR", "NESTLEIND", "BRITANNIA", "ITC"]
+      },
+      "below_estimate": {
+        "direction": "positive",
+        "chain": [
+          "CPI = Consumer Price Index — measures price rise of everyday things",
+          "When CPI comes BELOW expectations → prices rose less than expected",
+          "Lower inflation → RBI has room to CUT rates in future",
+          "Rate cuts expected → banks may lower EMIs → you spend more",
+          "More spending → company profits rise → stock market UP 📈"
+        ],
+        "sectors": {
+          "Banking": "✅ Positive: rate cut hopes increase, positive for all banks",
+          "Auto": "✅ Positive: cheaper loans expected in future",
+          "Consumer Goods": "✅ Positive: input costs stable"
+        },
+        "stocks": ["HDFCBANK", "KOTAKBANK", "MARUTI", "TATACONSUM"]
+      }
+    }
+  },
+  "BUDGET": {
+    "name": "Union Budget",
+    "modifiers": {
+      "capex_focus": {
+        "direction": "positive",
+        "chain": [
+          "Union Budget = Government's annual spending plan for the country",
+          "When government focuses on CAPEX (building roads, railways, bridges)",
+          "Construction companies get big contracts → they hire more workers",
+          "Workers earn money → they spend on goods → economy grows",
+          "Infrastructure + consumption growth → stock market UP 📈"
+        ],
+        "sectors": {
+          "Infrastructure": "⭐ Direct: L&T, HCC get major contracts",
+          "Cement": "✅ Positive: more construction needs more cement",
+          "Capital Goods": "✅ Positive: increased government spending boosts orders"
+        },
+        "stocks": ["LT", "ULTRACEMCO", "AMBUJACEM", "SIEMENS", "BEL"]
+      },
+      "populist": {
+        "direction": "positive",
+        "chain": [
+          "Union Budget = Government's spending plan",
+          "When budget focuses on FARMERS and POOR (free schemes, subsidies)",
+          "Rural demand gets a boost → people in villages spend more",
+          "FMCG companies, tractor makers, and two-wheeler companies benefit",
+          "Rural India consuming more → select stocks go UP 📈"
+        ],
+        "sectors": {
+          "FMCG": "✅ Positive: rural demand boost",
+          "Auto (2-wheelers)": "✅ Positive: higher rural income → more purchases",
+          "Agri": "✅ Positive: farm equipment demand"
+        },
+        "stocks": ["HINDUNILVR", "DABUR", "MARUTI", "HEROMOTOCO", "M&M"]
+      },
+      "fiscal_consolidation": {
+        "direction": "positive",
+        "chain": [
+          "Union Budget = Government's spending plan",
+          "Government focuses on reducing DEFICIT (spending less than it earns)",
+          "Lower deficit → RBI happy → bond yields fall → interest rates may come down",
+          "Rate cuts → cheaper loans → economy grows → stock market UP 📈"
+        ],
+        "sectors": {
+          "Banking": "✅ Positive: falling bond yields = banks' bond profits rise",
+          "Bonds": "✅ Positive: bond prices rise as yields fall"
+        },
+        "stocks": ["HDFCBANK", "ICICIBANK", "SBIN"]
+      }
+    }
+  },
+  "GDP": {
+    "name": "India GDP Growth Data",
+    "modifiers": {
+      "above_estimate": {
+        "direction": "positive",
+        "chain": [
+          "GDP = Gross Domestic Product — measures how fast the Indian economy is growing",
+          "When GDP comes ABOVE expectations → economy is growing faster than thought",
+          "Fast growth → companies sell more → they earn more profits",
+          "Foreign investors also get attracted to a fast-growing India",
+          "FII inflows + strong earnings → stock market UP 📈"
+        ],
+        "sectors": {
+          "Banking": "✅ Positive: fast growth = more loans = bank profits rise",
+          "All": "✅ Broad positive impact across all sectors"
+        },
+        "stocks": ["HDFCBANK", "ICICIBANK", "RELIANCE", "TCS"]
+      },
+      "below_estimate": {
+        "direction": "negative",
+        "chain": [
+          "GDP = Gross Domestic Product — measures Indian economy's growth speed",
+          "When GDP comes BELOW expectations → economy is slowing down",
+          "Slow growth → companies sell less → they earn less profit",
+          "RBI may need to cut rates → but only if inflation is low",
+          "Until then, market remains NEGATIVE 📉"
+        ],
+        "sectors": {
+          "Banking": "🔴 Negative: slow growth = fewer loans = bank profits fall",
+          "All": "⚠️ Broad negative impact"
+        },
+        "stocks": ["HDFCBANK", "ICICIBANK", "RELIANCE"]
+      }
+    }
+  },
+  "EARNINGS": {
+    "name": "Corporate Earnings Season",
+    "modifiers": {
+      "beat": {
+        "direction": "positive",
+        "chain": [
+          "Earnings season = companies report their quarterly profits",
+          "When a company BEATS estimates → its profit is HIGHER than expected",
+          "Higher profits → company has more money → can give dividends, invest more",
+          "Investors get excited → buy more shares → stock price goes UP 📈"
+        ],
+        "sectors": {},
+        "stocks": []
+      },
+      "miss": {
+        "direction": "negative",
+        "chain": [
+          "Earnings season = companies report their quarterly profits",
+          "When a company MISSES estimates → its profit is LOWER than expected",
+          "Lower profits → company struggles → may cut costs or jobs",
+          "Investors get worried → sell shares → stock price goes DOWN 📉"
+        ],
+        "sectors": {},
+        "stocks": []
+      }
+    }
+  },
+  "GLOBAL": {
+    "name": "Global Market Cues",
+    "modifiers": {
+      "selloff": {
+        "direction": "negative",
+        "chain": [
+          "Global markets (US, Europe, Asia) affect Indian markets too",
+          "When global markets SELL-OFF (crash) → investors worldwide get scared",
+          "Foreign investors sell Indian stocks to cover losses elsewhere",
+          "Even strong Indian companies get sold in panic → Nifty DOWN 📉",
+          "This is usually temporary — markets recover in a few days"
+        ],
+        "sectors": {
+          "IT": "🔴 Negative: most exposed to global economy",
+          "Metals": "🔴 Negative: global demand falls",
+          "All": "⚠️ Broad negative impact, but temporary"
+        },
+        "stocks": ["INFY", "TCS", "HINDALCO", "TATASTEEL"]
+      },
+      "geopolitical": {
+        "direction": "negative",
+        "chain": [
+          "Geopolitical tensions (war, conflict) create uncertainty in markets",
+          "War → oil prices may rise → India (oil importer) gets hurt",
+          "Uncertainty → companies delay investments → economy slows",
+          "Risk-off mood → investors sell stocks → market DOWN 📉"
+        ],
+        "sectors": {
+          "Oil & Gas": "🔴 Negative: higher crude oil costs hurt OMCs",
+          "Aviation": "🔴 Negative: jet fuel becomes expensive",
+          "IT": "⚠️ May benefit from rupee depreciation"
+        },
+        "stocks": ["IOC", "BPCL", "INDIGO", "TATAMOTORS"]
+      },
+      "oil_spike": {
+        "direction": "negative",
+        "chain": [
+          "India imports most of its oil — when crude prices SPIKE, it hurts",
+          "Higher oil price → India pays more for the same oil",
+          "More money going out → rupee becomes weaker vs dollar",
+          "Oil companies, airlines get hurt → their costs rise",
+          "Inflation may also rise → RBI can't cut rates → market DOWN 📉"
+        ],
+        "sectors": {
+          "Oil Marketing": "🔴 Negative: buy oil at high price, forced to sell at government-fixed rates",
+          "Aviation": "🔴 Negative: jet fuel is their biggest cost",
+          "Cement": "🔴 Negative: uses coal (oil-linked) for production"
+        },
+        "stocks": ["IOC", "BPCL", "HPCL", "INDIGO", "ULTRACEMCO"]
+      }
+    }
+  }
+}

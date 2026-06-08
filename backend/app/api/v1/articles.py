@@ -1,7 +1,10 @@
 from fastapi import APIRouter, Query
-from app.database import supabase
+from pathlib import Path
+import json
 
 router = APIRouter(prefix="/articles", tags=["articles"])
+
+ARTICLES_PATH = Path(__file__).parent.parent.parent.parent / "data" / "articles.json"
 
 
 @router.get("")
@@ -12,14 +15,21 @@ def list_articles(
     offset: int = Query(0),
 ):
     try:
-        query = supabase.table("articles").select("*").order("published_at", desc=True)
+        with open(ARTICLES_PATH) as f:
+            all_articles = json.load(f)
+    except Exception:
+        return {"articles": [], "offset": offset, "limit": limit}
 
-        if date:
-            query = query.eq("published_at::date", date)
-        if source:
-            query = query.eq("source", source)
+    if not isinstance(all_articles, list):
+        return {"articles": [], "offset": offset, "limit": limit}
 
-        result = query.range(offset, offset + limit - 1).execute()
-        return {"articles": result.data or [], "offset": offset, "limit": limit}
-    except Exception as e:
-        return {"error": str(e)}
+    filtered = all_articles
+    if source:
+        filtered = [a for a in filtered if a.get("source") == source]
+
+    # Sort by published_at descending
+    filtered.sort(key=lambda a: a.get("published_at", ""), reverse=True)
+
+    paginated = filtered[offset: offset + limit]
+
+    return {"articles": paginated, "offset": offset, "limit": limit}
