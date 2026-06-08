@@ -93,4 +93,30 @@ def get_today_brief():
     brief_data["key_levels_nifty"] = _compute_key_levels("nifty")
     brief_data["key_levels_banknifty"] = _compute_key_levels("banknifty")
 
+    # Add accuracy data
+    try:
+        acc_path = DATA_DIR / "accuracy.json"
+        with open(acc_path) as f:
+            acc_records = json.load(f)
+        if isinstance(acc_records, list) and acc_records:
+            recent = sorted(acc_records, key=lambda r: r.get("date", ""), reverse=True)[:10]
+            correct = sum(1 for r in recent if r.get("correct") is True)
+            total = sum(1 for r in recent if r.get("correct") is not None)
+            brief_data["accuracy"] = {
+                "recent": round(correct / total * 100) if total > 0 else 0,
+                "total": total,
+                "last_10": f"{correct}/{total}",
+            }
+    except Exception:
+        brief_data["accuracy"] = {"recent": 0, "total": 0, "last_10": "0/0"}
+
+    # Add trade action suggestion
+    sent = brief_data.get("overall_sentiment", "neutral")
+    if sent == "bullish":
+        brief_data["trade_action"] = "Consider buying Nifty calls or selling puts. Market sentiment is positive."
+    elif sent == "bearish":
+        brief_data["trade_action"] = "Consider buying Nifty puts or selling calls. Market sentiment is negative."
+    else:
+        brief_data["trade_action"] = "Market is neutral. Wait for clearer direction or trade range-bound strategies."
+
     return brief_data

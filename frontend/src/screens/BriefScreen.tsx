@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Clock, Sun, Moon } from 'lucide-react'
+import { Clock, Sun, Moon, TrendingUp, TrendingDown, Minus } from 'lucide-react'
 import { useBrief } from '../hooks/useBrief'
 import { useTheme } from '../config/theme'
 import SentimentBadge from '../components/ui/SentimentBadge'
@@ -20,6 +20,55 @@ const INDEX_OPTIONS = [
   { label: 'Nifty 50', value: 'nifty' },
   { label: 'Bank Nifty', value: 'banknifty' },
 ]
+
+function MarketCallBanner({ sentiment, accuracy, tradeAction }: { sentiment: string; accuracy: { recent: number; last_10: string } | undefined; tradeAction?: string }) {
+  const isBullish = sentiment === 'bullish'
+  const isBearish = sentiment === 'bearish'
+  const bgColor = isBullish ? 'bg-green-500' : isBearish ? 'bg-red-500' : 'bg-amber-500'
+  const Icon = isBullish ? TrendingUp : isBearish ? TrendingDown : Minus
+  const emoji = isBullish ? '📈' : isBearish ? '📉' : '⚪'
+  const action = isBullish ? 'BUY CALLS / SELL PUTS' : isBearish ? 'BUY PUTS / SELL CALLS' : 'RANGE TRADE / WAIT'
+  const accText = accuracy ? `${accuracy.recent}% (${accuracy.last_10} last 10)` : 'No data yet'
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ type: 'spring', stiffness: 300 }}
+      className={`rounded-xl border ${bgColor}/20 bg-gradient-to-br ${bgColor}/5 ${bgColor}/10 overflow-hidden`}
+    >
+      <div className="p-4 space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className={`w-10 h-10 rounded-xl ${bgColor} flex items-center justify-center shadow-lg shadow-${bgColor}/20`}>
+              <Icon size={20} className="text-white" />
+            </div>
+            <div>
+              <div className="text-lg font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+                {emoji} MARKET CALL: {sentiment.toUpperCase()}
+              </div>
+              <div className="text-xs text-gray-400 dark:text-gray-500">
+                Suggested: <span className="font-medium text-gray-700 dark:text-gray-300">{action}</span>
+              </div>
+            </div>
+          </div>
+          <div className="text-right">
+            <div className={`text-2xl font-bold font-mono ${isBullish ? 'text-green-500' : isBearish ? 'text-red-500' : 'text-amber-500'}`}>
+              {emoji}
+            </div>
+            <div className="text-[10px] text-gray-400 mt-0.5">Accuracy: {accText}</div>
+          </div>
+        </div>
+
+        {tradeAction && (
+          <div className="rounded-lg bg-gray-900/5 dark:bg-white/5 px-3 py-2">
+            <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">{tradeAction}</p>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  )
+}
 
 export default function BriefScreen() {
   const { brief, loading, error, refetch } = useBrief()
@@ -52,6 +101,12 @@ export default function BriefScreen() {
           </button>
         </div>
       </header>
+
+      <MarketCallBanner
+        sentiment={brief.overall_sentiment}
+        accuracy={brief.accuracy}
+        tradeAction={brief.trade_action}
+      />
 
       <Toggle options={INDEX_OPTIONS} selected={index} onChange={setIndex} />
 

@@ -34,6 +34,12 @@ export interface Brief {
   key_levels?: KeyLevels
   key_levels_nifty?: KeyLevels
   key_levels_banknifty?: KeyLevels
+  accuracy?: {
+    recent: number
+    total: number
+    last_10: string
+  }
+  trade_action?: string
 }
 
 export interface GlobalMarketPulse {
