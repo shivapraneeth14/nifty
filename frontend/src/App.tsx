@@ -10,7 +10,7 @@ import TabBar from './components/ui/TabBar'
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="max-w-lg mx-auto min-h-screen bg-white dark:bg-[#0B0D14] transition-colors duration-300">
+      <div className="min-h-screen bg-white dark:bg-[#0B0D14] transition-colors duration-300">
         <div className="p-4">
           <Routes>
             <Route path="/" element={<BriefScreen />} />

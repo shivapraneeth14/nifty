@@ -14,7 +14,7 @@ export default function TabBar() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-[#0B0D14]/80 backdrop-blur-xl">
-      <div className="max-w-lg mx-auto flex">
+      <div className="flex">
         {tabs.map((t) => {
           const active = location.pathname === t.path
           const Icon = t.icon
