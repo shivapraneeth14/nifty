@@ -1,4 +1,4 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from pathlib import Path
 
 
@@ -11,9 +11,10 @@ class Settings(BaseSettings):
     app_env: str = "development"
     debug: bool = True
 
-    class Config:
-        env_file = Path(__file__).parent.parent.parent / ".env"
-        extra = "ignore"
+    model_config = SettingsConfigDict(
+        env_file=str(Path(__file__).parent.parent.parent / ".env"),
+        extra="ignore",
+    )
 
 
 settings = Settings()

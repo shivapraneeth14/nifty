@@ -69,8 +69,9 @@ def _try_hf_api(title: str, body: str = "") -> dict | None:
     """Try HuggingFace FinBERT API. Returns None on failure."""
     try:
         from huggingface_hub import InferenceClient
+        from app.config import settings
 
-        client = InferenceClient()
+        client = InferenceClient(token=settings.hf_api_token)
 
         text = f"{title}. {body[:300]}" if body else title
         result = client.text_classification(
