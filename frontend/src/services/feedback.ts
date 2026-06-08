@@ -1,0 +1,5 @@
+import { post } from './api'
+
+export function submitFeedback(data: { brief_id: string; article_id?: string; helpful: boolean }) {
+  return post('/feedback', data)
+}

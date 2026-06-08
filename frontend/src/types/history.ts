@@ -7,3 +7,10 @@ export interface HistoricalEvent {
   banknifty_move: number | null
   sentiment_after: string | null
 }
+
+export interface AccuracyDay {
+  date: string
+  predicted: string
+  actual_move: number
+  correct: boolean
+}
