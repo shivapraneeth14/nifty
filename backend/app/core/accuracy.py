@@ -30,80 +30,94 @@ def _save_accuracy(records: list[dict]):
         json.dump(records, f, indent=2)
 
 
-def get_nifty_close(date_str: str) -> int | None:
-    """Fetch Nifty closing change for a given date from historical events."""
+def get_index_close(date_str: str, index: str = "nifty") -> int | None:
+    """Get closing change for a specific index from historical events."""
+    key = "nifty_move" if index == "nifty" else "banknifty_move"
     events = _load_events()
     for e in events:
         if e.get("date") == date_str:
-            return e.get("nifty_move")
+            return e.get(key)
     return None
 
 
-def check_yesterday_brief(sentiment: str, date_str: str | None = None) -> dict:
-    """Check if yesterday's brief was accurate based on today's knowledge."""
+def _check_one(predicted: str, actual: int | None) -> bool | None:
+    """Check if a prediction was correct for a single index."""
+    if actual is None:
+        return None
+    if predicted == "neutral":
+        return abs(actual) < 50
+    elif predicted == "bullish":
+        return actual > 0
+    else:
+        return actual < 0
+
+
+def check_yesterday_brief(predicted_nifty: str, predicted_banknifty: str, date_str: str | None = None) -> dict:
+    """Check yesterday's brief accuracy for both indices."""
     if date_str is None:
         check_date = (date.today() - timedelta(days=1)).isoformat()
     else:
         check_date = date_str
 
-    accuracy_records = _load_accuracy()
-
-    # Look for existing record
-    for r in accuracy_records:
+    records = _load_accuracy()
+    for r in records:
         if r.get("date") == check_date:
             return r
 
-    # Try to check actual move
-    actual_move = get_nifty_close(check_date)
-    if actual_move is None:
-        return {"date": check_date, "predicted": sentiment, "actual_move": None, "correct": None}
-
-    # Determine if prediction was correct
-    if sentiment == "neutral":
-        correct = abs(actual_move) < 50
-    elif sentiment == "bullish":
-        correct = actual_move > 0
-    else:
-        correct = actual_move < 0
+    nifty_move = get_index_close(check_date, "nifty")
+    banknifty_move = get_index_close(check_date, "banknifty")
 
     record = {
         "date": check_date,
-        "predicted": sentiment,
-        "actual_move": actual_move,
-        "correct": correct,
+        "predicted_nifty": predicted_nifty,
+        "nifty_move": nifty_move,
+        "nifty_correct": _check_one(predicted_nifty, nifty_move),
+        "predicted_banknifty": predicted_banknifty,
+        "banknifty_move": banknifty_move,
+        "banknifty_correct": _check_one(predicted_banknifty, banknifty_move),
     }
 
-    # Update accuracy records
-    updated = [r for r in accuracy_records if r.get("date") != check_date]
+    updated = [r for r in records if r.get("date") != check_date]
     updated.append(record)
     _save_accuracy(updated)
 
     return record
 
 
-def get_accuracy_stats() -> dict:
-    """Get accuracy stats for the last 10, 30, and all days."""
+def get_accuracy_stats(index: str = "nifty") -> dict:
+    """Get accuracy stats for a specific index."""
     records = _load_accuracy()
-
     if not records:
         return {"last_10": 0, "last_30": 0, "total": 0, "count": 0, "recent_days": []}
 
-    # Sort by date descending
     sorted_records = sorted(records, key=lambda r: r.get("date", ""), reverse=True)
 
+    correct_key = f"{index}_correct"
+    move_key = f"{index}_move"
+
     def calc_accuracy(subset: list[dict]) -> tuple[int, int]:
-        correct = sum(1 for r in subset if r.get("correct") is True)
-        total = sum(1 for r in subset if r.get("correct") is not None)
+        correct = sum(1 for r in subset if r.get(correct_key) is True)
+        total = sum(1 for r in subset if r.get(correct_key) is not None)
         return correct, total
 
     c10, t10 = calc_accuracy(sorted_records[:10])
     c30, t30 = calc_accuracy(sorted_records[:30])
     c_all, t_all = calc_accuracy(sorted_records)
 
+    recent = []
+    for r in sorted_records[:14]:
+        if r.get(correct_key) is not None:
+            recent.append({
+                "date": r.get("date", ""),
+                "predicted": r.get(f"predicted_{index}", ""),
+                "actual_move": r.get(move_key),
+                "correct": r.get(correct_key),
+            })
+
     return {
         "last_10": round(c10 / t10 * 100) if t10 > 0 else 0,
         "last_30": round(c30 / t30 * 100) if t30 > 0 else 0,
         "total": round(c_all / t_all * 100) if t_all > 0 else 0,
         "count": t_all,
-        "recent_days": [r for r in sorted_records[:14] if r.get("correct") is not None],
+        "recent_days": recent,
     }

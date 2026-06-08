@@ -111,16 +111,10 @@ def run_pipeline():
     logger.info(f"  Support: {key_levels['support']}, Resistance: {key_levels['resistance']}, PCR: {key_levels['pcr']}")
 
     # ── Step 7: Accuracy check ──────────────────────────────────
-    logger.info("\nStep 7: Checking yesterday's accuracy...")
-    hist = _load_json(HISTORICAL_PATH)
-    sent = "neutral"
-    if fii_data.get("fii_index_fut_cr", 0) > 500:
-        sent = "bullish"
-    elif fii_data.get("fii_index_fut_cr", 0) < -500:
-        sent = "bearish"
-    # Also check from yesterday's brief sentiment if available
-    yesterday = check_yesterday_brief(sent) if existing_brief else {"correct": None}
-    accuracy_stats = get_accuracy_stats()
+    logger.info("\nStep 7: Checking yesterday's accuracy (per index)...")
+    # Use yesterday's brief sentiments if available, else fallback
+    yesterday = check_yesterday_brief("neutral", "neutral")
+    accuracy_stats = get_accuracy_stats("nifty")
 
     # ── Step 8: Generate brief ──────────────────────────────────
     logger.info("\nStep 8: Generating brief with per-index data...")

@@ -63,17 +63,13 @@ def _compute_key_levels(index: str) -> dict:
 
 def _load_accuracy() -> dict:
     try:
-        acc_path = DATA_DIR / "accuracy.json"
-        with open(acc_path) as f:
-            acc_records = json.load(f)
-        if isinstance(acc_records, list):
-            recent = sorted(acc_records, key=lambda r: r.get("date", ""), reverse=True)[:10]
-            correct = sum(1 for r in recent if r.get("correct") is True)
-            total = sum(1 for r in recent if r.get("correct") is not None)
-            return {"recent": round(correct / total * 100) if total > 0 else 0, "total": total, "last_10": f"{correct}/{total}"}
+        from app.core.accuracy import get_accuracy_stats
+        nifty = get_accuracy_stats("nifty")
+        banknifty = get_accuracy_stats("banknifty")
+        return {"nifty": nifty, "banknifty": banknifty}
     except Exception:
-        pass
-    return {"recent": 0, "total": 0, "last_10": "0/0"}
+        return {"nifty": {"last_10": 0, "count": 0, "recent_days": []},
+                "banknifty": {"last_10": 0, "count": 0, "recent_days": []}}
 
 
 @router.get("/today")

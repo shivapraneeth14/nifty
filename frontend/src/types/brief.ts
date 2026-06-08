@@ -34,7 +34,10 @@ export interface Brief {
   key_levels?: KeyLevels
   key_levels_nifty?: KeyLevels
   key_levels_banknifty?: KeyLevels
-  accuracy?: { recent: number; total: number; last_10: string }
+  accuracy?: {
+    nifty: { last_10: number; count: number; recent_days?: { date: string; predicted: string; actual_move: number | null; correct: boolean | null }[] }
+    banknifty: { last_10: number; count: number; recent_days?: { date: string; predicted: string; actual_move: number | null; correct: boolean | null }[] }
+  }
 
   // Per-index data
   sentiment_nifty: 'bullish' | 'bearish' | 'neutral'
@@ -88,9 +91,12 @@ export interface Fiidata {
 
 export interface Debrief {
   date: string
-  predicted: string
-  actual_move: number | null
-  correct: boolean | null
+  predicted_nifty?: string
+  nifty_move?: number | null
+  nifty_correct?: boolean | null
+  predicted_banknifty?: string
+  banknifty_move?: number | null
+  banknifty_correct?: boolean | null
   debrief_text: string
   created_at: string
 }

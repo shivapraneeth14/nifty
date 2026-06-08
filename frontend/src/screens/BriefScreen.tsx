@@ -21,20 +21,23 @@ const INDEX_OPTIONS = [
   { label: 'Bank Nifty', value: 'banknifty' },
 ]
 
-function MarketCallBanner({ sentiment, accuracy, tradeAction, indexLabel, indexShort }: {
+function MarketCallBanner({ sentiment, accuracy, tradeAction, indexLabel, indexShort, index }: {
   sentiment: string
-  accuracy?: { recent: number; last_10: string }
+  accuracy?: { nifty: { last_10: number; count: number }; banknifty: { last_10: number; count: number } }
   tradeAction?: string
   indexLabel: string
   indexShort: string
+  index: string
 }) {
+  const isNifty = index === 'nifty'
   const isBullish = sentiment === 'bullish'
   const isBearish = sentiment === 'bearish'
   const bgColor = isBullish ? 'bg-green-500' : isBearish ? 'bg-red-500' : 'bg-amber-500'
   const Icon = isBullish ? TrendingUp : isBearish ? TrendingDown : Minus
   const emoji = isBullish ? '📈' : isBearish ? '📉' : '⚪'
   const action = isBullish ? `BUY ${indexShort.toUpperCase()} CALLS / SELL PUTS` : isBearish ? `BUY ${indexShort.toUpperCase()} PUTS / SELL CALLS` : 'RANGE TRADE / WAIT'
-  const accText = accuracy ? `${accuracy.recent}% (${accuracy.last_10} last 10)` : 'No data yet'
+  const idxAcc = isNifty ? accuracy?.nifty : accuracy?.banknifty
+  const accText = idxAcc && idxAcc.count > 0 ? `${idxAcc.last_10}% (${idxAcc.count} days)` : 'No data yet'
 
   return (
     <motion.div
@@ -118,6 +121,7 @@ export default function BriefScreen() {
         tradeAction={currentTradeAction}
         indexLabel={indexLabel}
         indexShort={indexShort}
+        index={index}
       />
 
       <Toggle options={INDEX_OPTIONS} selected={index} onChange={setIndex} />
