@@ -47,7 +47,25 @@ def get_relevant_history(articles: list[dict], limit_per_type: int = 5) -> list[
     return all_events
 
 
+def _summarize_moves(moves: list, label: str) -> str:
+    if not moves:
+        return ""
+    avg_move = sum(moves) / len(moves)
+    up_count = sum(1 for m in moves if m > 0)
+    down_count = sum(1 for m in moves if m < 0)
+    direction = "up" if avg_move > 0 else "down"
+    return (
+        f"Last {len(moves)} {label} events: "
+        f"{direction} avg {abs(avg_move):.0f} pts "
+        f"({up_count} times up, {down_count} times down)"
+    )
+
+
 def get_event_summary(event_type: str) -> str:
+    return get_event_summary_index(event_type)["nifty"]
+
+
+def get_event_summary_index(event_type: str) -> dict:
     try:
         result = (
             supabase.table("historical_events")
@@ -59,22 +77,15 @@ def get_event_summary(event_type: str) -> str:
         )
         events = result.data or []
     except Exception:
-        return ""
+        return {"nifty": "", "banknifty": ""}
 
     if not events:
-        return ""
+        return {"nifty": "", "banknifty": ""}
 
-    moves = [e["nifty_move"] for e in events if e.get("nifty_move") is not None]
-    if not moves:
-        return ""
+    nifty_moves = [e["nifty_move"] for e in events if e.get("nifty_move") is not None]
+    banknifty_moves = [e["banknifty_move"] for e in events if e.get("banknifty_move") is not None]
 
-    avg_move = sum(moves) / len(moves)
-    up_count = sum(1 for m in moves if m > 0)
-    down_count = sum(1 for m in moves if m < 0)
-    direction = "up" if avg_move > 0 else "down"
-
-    return (
-        f"Last {len(moves)} {event_type} events: "
-        f"Nifty {direction} avg {abs(avg_move):.0f} pts "
-        f"({up_count} times up, {down_count} times down)"
-    )
+    return {
+        "nifty": _summarize_moves(nifty_moves, event_type),
+        "banknifty": _summarize_moves(banknifty_moves, event_type),
+    }

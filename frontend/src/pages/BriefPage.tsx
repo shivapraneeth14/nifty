@@ -4,9 +4,12 @@ import type { Brief } from '../types/brief'
 import BriefCard from '../components/BriefCard'
 import SentimentBadge from '../components/SentimentBadge'
 
+type Index = 'nifty' | 'banknifty'
+
 export default function BriefPage() {
   const [brief, setBrief] = useState<Brief | null>(null)
   const [loading, setLoading] = useState(true)
+  const [index, setIndex] = useState<Index>('nifty')
 
   useEffect(() => {
     fetchTodayBrief()
@@ -33,6 +36,8 @@ export default function BriefPage() {
     )
   }
 
+  const histSummary = index === 'nifty' ? brief.historical_summary_nifty : brief.historical_summary_banknifty
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -40,13 +45,38 @@ export default function BriefPage() {
         <SentimentBadge label={brief.overall_sentiment} />
       </div>
 
+      <div className="flex gap-1 bg-gray-100 rounded-lg p-1">
+        <button
+          onClick={() => setIndex('nifty')}
+          className={`flex-1 text-center py-1.5 text-sm font-medium rounded-md transition ${
+            index === 'nifty' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500'
+          }`}
+        >
+          Nifty 50
+        </button>
+        <button
+          onClick={() => setIndex('banknifty')}
+          className={`flex-1 text-center py-1.5 text-sm font-medium rounded-md transition ${
+            index === 'banknifty' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500'
+          }`}
+        >
+          Bank Nifty
+        </button>
+      </div>
+
       <p className="text-sm text-gray-600 bg-gray-50 rounded-lg p-3">
         {brief.summary_text}
       </p>
 
+      {histSummary && (
+        <p className="text-xs text-blue-700 bg-blue-50 px-3 py-2 rounded-lg">
+          📊 {index === 'nifty' ? 'Nifty' : 'BankNifty'} historical context: {histSummary}
+        </p>
+      )}
+
       <div className="space-y-3">
         {brief.items.map((item) => (
-          <BriefCard key={item.id} item={item} briefId={brief.id} />
+          <BriefCard key={item.id} item={item} briefId={brief.id} index={index} />
         ))}
       </div>
     </div>

@@ -7,6 +7,7 @@ export interface BriefItem {
   historical_context: string
   order_index: number
   sentiment_label: 'bullish' | 'bearish' | 'neutral'
+  sentiment_score: number | null
   source: string
   url: string
 }
@@ -18,4 +19,6 @@ export interface Brief {
   summary_text: string
   created_at: string
   items: BriefItem[]
+  historical_summary_nifty: string
+  historical_summary_banknifty: string
 }

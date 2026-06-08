@@ -1,7 +1,7 @@
 import logging
 from datetime import date, datetime, timezone
 from app.services.sentiment import get_overall_sentiment
-from app.services.historical import get_event_summary
+from app.services.historical import get_event_summary_index
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ def generate_brief(articles: list[dict], historical_events: list[dict] = None) -
 
     detected_event_types = set(e["event_type"] for e in historical_events)
     event_type = next(iter(detected_event_types), None)
-    hist_summary = get_event_summary(event_type) if event_type else ""
+    hist_summaries = get_event_summary_index(event_type) if event_type else {"nifty": "", "banknifty": ""}
 
     overall = get_overall_sentiment(top_articles)
 
@@ -52,20 +52,24 @@ def generate_brief(articles: list[dict], historical_events: list[dict] = None) -
             "headline": a["title"][:100],
             "impact_text": f"Sentiment: {a['sentiment_label'].upper()} with {a['sentiment_score']:.0%} confidence.",
             "sentiment_label": a["sentiment_label"],
-            "historical_context": hist_summary if i == 0 else "",
+            "historical_context": hist_summaries["nifty"] if i == 0 else "",
             "source": a.get("source", ""),
             "url": a.get("url", ""),
             "order_index": i,
         })
 
     summary_text = f"Market sentiment today is {overall.upper()} based on {len(top_articles)} key articles."
-    if hist_summary:
-        summary_text += f" {hist_summary}"
+    if hist_summaries["nifty"]:
+        summary_text += f" Nifty: {hist_summaries['nifty']}"
+    if hist_summaries["banknifty"]:
+        summary_text += f" BankNifty: {hist_summaries['banknifty']}"
 
     return {
         "date": today,
         "overall_sentiment": overall,
         "summary_text": summary_text,
         "items": items,
+        "historical_summary_nifty": hist_summaries["nifty"],
+        "historical_summary_banknifty": hist_summaries["banknifty"],
         "created_at": datetime.now(timezone.utc).isoformat(),
     }
