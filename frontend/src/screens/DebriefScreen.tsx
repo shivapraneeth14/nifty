@@ -37,7 +37,7 @@ export default function DebriefScreen() {
               </div>
               <div className="rounded-lg bg-gray-50 dark:bg-[#131620] p-3 text-center">
                 <div className="text-[10px] text-gray-400 mb-1">Actual</div>
-                <span className={`text-lg font-bold font-mono ${(p.actual ?? 0) > 0 ? 'text-green-500' : (p.actual ?? 0) < 0 ? 'text-red-500' : 'text-gray-400'}`}>{formatPoints(p.actual)}</span>
+                <span className={`text-lg font-bold font-mono ${(p.actual ?? 0) > 0 ? 'text-green-500' : (p.actual ?? 0) < 0 ? 'text-red-500' : 'text-gray-400'}`}>{formatPoints(p.actual ?? null)}</span>
               </div>
             </div>
             <div className="text-right">
