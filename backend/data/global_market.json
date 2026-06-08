@@ -1,0 +1,28 @@
+{
+  "sgx_nifty": {
+    "price": null,
+    "change_pct": null
+  },
+  "dow_futures": {
+    "price": null,
+    "change_pct": null
+  },
+  "crude_oil": {
+    "price": null,
+    "change_pct": null
+  },
+  "usd_inr": {
+    "price": null,
+    "change_pct": null
+  },
+  "us_10y": {
+    "price": null,
+    "change_pct": null
+  },
+  "vix": {
+    "price": null,
+    "change_pct": null
+  },
+  "updated_at": "2026-06-08T10:46:42.796555+00:00",
+  "summary": "Global market data unavailable"
+}

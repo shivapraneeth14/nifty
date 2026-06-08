@@ -1,10 +1,11 @@
 import { Link, useLocation } from 'react-router-dom'
-import { LayoutDashboard, Newspaper, History, Settings } from 'lucide-react'
+import { LayoutDashboard, Newspaper, History, ChartSpline, Settings } from 'lucide-react'
 
 const tabs = [
   { label: 'Brief', path: '/', icon: LayoutDashboard },
   { label: 'Feed', path: '/feed', icon: Newspaper },
   { label: 'History', path: '/history', icon: History },
+  { label: 'Accuracy', path: '/accuracy', icon: ChartSpline },
   { label: 'Settings', path: '/settings', icon: Settings },
 ]
 

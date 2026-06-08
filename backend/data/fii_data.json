@@ -3,5 +3,6 @@
   "fii_index_fut_cr": 0,
   "dii_equity_cr": 0,
   "date": "2026-06-08",
-  "note": "NSE FII API unavailable \u2014 using estimate based on sentiment"
+  "direction": "neutral",
+  "interpretation": "FIIs and DIIs were both relatively quiet \u2014 no major institutional flow detected."
 }

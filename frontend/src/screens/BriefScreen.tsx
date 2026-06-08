@@ -10,6 +10,10 @@ import { EmptyState } from '../components/ui/ErrorState'
 import BriefCard from '../components/brief/BriefCard'
 import KeyLevelsPanel from '../components/brief/KeyLevelsPanel'
 import Toggle from '../components/ui/Toggle'
+import SentimentMeter from '../components/ui/SentimentMeter'
+import GlobalMarketPulse from '../components/ui/GlobalMarketPulse'
+import OptionChainCard from '../components/ui/OptionChainCard'
+import FiiPanel from '../components/ui/FiiPanel'
 import { getRelativeTime } from '../utils/formatters'
 
 const INDEX_OPTIONS = [
@@ -57,7 +61,13 @@ export default function BriefScreen() {
         </div>
       )}
 
+      <GlobalMarketPulse />
+      <SentimentMeter nifty={0.2} banknifty={0.1} overall={brief.overall_sentiment} />
+
       {brief.key_levels && <KeyLevelsPanel levels={brief.key_levels} />}
+
+      <FiiPanel />
+      <OptionChainCard />
 
       <div className="space-y-3">
         {brief.items.map((item) => (

@@ -3,6 +3,7 @@ import BriefScreen from './screens/BriefScreen'
 import FeedScreen from './screens/FeedScreen'
 import HistoryScreen from './screens/HistoryScreen'
 import AccuracyScreen from './screens/AccuracyScreen'
+import DebriefScreen from './screens/DebriefScreen'
 import SettingsScreen from './screens/SettingsScreen'
 import TabBar from './components/ui/TabBar'
 
@@ -16,6 +17,7 @@ export default function App() {
             <Route path="/feed" element={<FeedScreen />} />
             <Route path="/history" element={<HistoryScreen />} />
             <Route path="/accuracy" element={<AccuracyScreen />} />
+            <Route path="/debrief" element={<DebriefScreen />} />
             <Route path="/settings" element={<SettingsScreen />} />
           </Routes>
         </div>
