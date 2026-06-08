@@ -1,7 +1,7 @@
 {
   "date": "2026-06-08",
   "overall_sentiment": "neutral",
-  "summary_text": "Market sentiment today is NEUTRAL based on 5 key articles. Nifty: Last 8 EARNINGS events down avg 2 pts (5 up, 3 down). BankNifty: Last 8 EARNINGS events down avg 12 pts.",
+  "summary_text": "Market sentiment is mixed. Nifty: NEUTRAL (score: +0.05). BankNifty: NEUTRAL (score: +0.00). Nifty: Last 8 EARNINGS events: down avg 2 pts (5 up, 3 down) BankNifty: Last 8 EARNINGS events: down avg 12 pts (5 up, 3 down)",
   "items": [
     {
       "id": "0",
@@ -12,11 +12,13 @@
       "why": [],
       "sectors": {},
       "stocks": [],
-      "historical_context": "Last 8 EARNINGS events: down avg 2 pts (5 up, 3 down)",
-      "historical_context_banknifty": "Last 8 EARNINGS events: down avg 12 pts (5 up, 3 down)",
+      "historical_context_nifty": "Last 8 EARNINGS events: down avg 2 pts (5 up, 3 down)",
+      "historical_context_banknifty": "",
       "source": "Moneycontrol",
       "url": "https://www.moneycontrol.com/news/local-markets/sensex-nifty-extend-gains-to-3rd-day-q4-results-to-guide-stock-specific-action_17530901.html",
-      "order_index": 0
+      "order_index": 0,
+      "_nifty_rel": 6,
+      "_banknifty_rel": 0
     },
     {
       "id": "1",
@@ -27,29 +29,16 @@
       "why": [],
       "sectors": {},
       "stocks": [],
-      "historical_context": "",
+      "historical_context_nifty": "",
       "historical_context_banknifty": "",
       "source": "Moneycontrol",
       "url": "https://www.moneycontrol.com/news/local-markets/sensex-nifty-gain-for-third-daya-row-easing-volatility-to-support-bull-trend_17531821.html",
-      "order_index": 1
+      "order_index": 1,
+      "_nifty_rel": 6,
+      "_banknifty_rel": 0
     },
     {
       "id": "2",
-      "headline": "Direct vs regular mutual funds: Meaning, key differences and which one to choose",
-      "impact_text": "Sentiment: NEUTRAL with 95% confidence.",
-      "sentiment_label": "neutral",
-      "sentiment_score": 0.9488,
-      "why": [],
-      "sectors": {},
-      "stocks": [],
-      "historical_context": "",
-      "historical_context_banknifty": "",
-      "source": "Mint",
-      "url": "https://www.livemint.com/money/personal-finance/direct-vs-regular-mutual-funds-meaning-key-differences-and-which-one-to-choose-11780891284507.html",
-      "order_index": 2
-    },
-    {
-      "id": "3",
       "headline": "Top 5 multi-cap funds with lowest expense ratios and highest long-term returns for investors to track",
       "impact_text": "Sentiment: NEUTRAL with 88% confidence.",
       "sentiment_label": "neutral",
@@ -57,26 +46,64 @@
       "why": [],
       "sectors": {},
       "stocks": [],
-      "historical_context": "",
+      "historical_context_nifty": "",
       "historical_context_banknifty": "",
       "source": "Mint",
       "url": "https://www.livemint.com/money/personal-finance/top-5-multi-cap-funds-with-lowest-expense-ratios-and-highest-long-term-returns-for-investors-to-track-11780115623613.html",
-      "order_index": 3
+      "order_index": 2,
+      "_nifty_rel": 2,
+      "_banknifty_rel": 0
     },
     {
-      "id": "4",
-      "headline": "33 of 38 Flexi-cap funds beat the Nifty 500, but most investors still lost money",
-      "impact_text": "Sentiment: NEUTRAL with 63% confidence.",
-      "sentiment_label": "neutral",
-      "sentiment_score": 0.6339,
+      "id": "3",
+      "headline": "Mid-day Mood | Cooling volatility sparks market rally, India VIX sees steepest fall in 4 years",
+      "impact_text": "Sentiment: BULLISH with 68% confidence.",
+      "sentiment_label": "bullish",
+      "sentiment_score": 0.6798,
       "why": [],
       "sectors": {},
       "stocks": [],
-      "historical_context": "",
+      "historical_context_nifty": "",
+      "historical_context_banknifty": "",
+      "source": "Moneycontrol",
+      "url": "https://www.moneycontrol.com/news/local-markets/mid-day-mood-|-cooling-volatility-sparks-market-rally-india-vix-sees-steepest-fall4-years_17531481.html",
+      "order_index": 3,
+      "_nifty_rel": 0,
+      "_banknifty_rel": 0
+    },
+    {
+      "id": "4",
+      "headline": "A guide to government securities for retail investors: Meaning, ways to invest, benefits and risks",
+      "impact_text": "Sentiment: NEUTRAL with 95% confidence.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9503,
+      "why": [
+        "RBI is India's central bank",
+        "When RBI HIKES the REPO RATE \u2192 it becomes MORE EXPENSIVE for banks to borrow",
+        "Higher cost for banks \u2192 they increase loan interest rates for customers",
+        "More expensive EMIs \u2192 you borrow less for houses, cars, and businesses",
+        "Less borrowing \u2192 less spending \u2192 companies earn less profit",
+        "Company profits fall \u2192 stock market goes DOWN \ud83d\udcc9"
+      ],
+      "sectors": {
+        "Banking": "\u2b50 Direct: may benefit from higher NIMs but loan growth slows",
+        "Auto": "\ud83d\udd34 Negative: expensive car loans reduce demand",
+        "Real Estate": "\ud83d\udd34 Negative: high home loan rates reduce buying"
+      },
+      "stocks": [
+        "HDFCBANK",
+        "ICICIBANK",
+        "SBIN",
+        "MARUTI",
+        "BAJFINANCE"
+      ],
+      "historical_context_nifty": "",
       "historical_context_banknifty": "",
       "source": "Mint",
-      "url": "https://www.livemint.com/money/personal-finance/33-of-38-flexi-cap-funds-beat-the-nifty-500-but-most-investors-still-lost-money-11780899746139.html",
-      "order_index": 4
+      "url": "https://www.livemint.com/money/personal-finance/a-guide-to-government-securities-for-retail-investors-meaning-ways-to-invest-benefits-and-risks-11780585119084.html",
+      "order_index": 4,
+      "_nifty_rel": 0,
+      "_banknifty_rel": 0
     }
   ],
   "key_levels": {
@@ -94,5 +121,245 @@
     "count": 0,
     "recent_days": []
   },
-  "created_at": "2026-06-08T10:55:39.996826+00:00"
+  "created_at": "2026-06-08T11:07:20.364631+00:00",
+  "sentiment_nifty": "neutral",
+  "sentiment_banknifty": "neutral",
+  "score_nifty": 0.049,
+  "score_banknifty": 0.0,
+  "summary_nifty": "Nifty sentiment is NEUTRAL (confidence 5%). Last 8 EARNINGS events: down avg 2 pts (5 up, 3 down)",
+  "summary_banknifty": "BankNifty sentiment is NEUTRAL (confidence 0%). Last 8 EARNINGS events: down avg 12 pts (5 up, 3 down)",
+  "trade_action_nifty": "Nifty is neutral. Wait for clearer direction or trade range-bound strategies.",
+  "trade_action_banknifty": "BankNifty is neutral. Wait for clearer direction or trade range-bound strategies.",
+  "items_nifty": [
+    {
+      "id": "0",
+      "headline": "Sensex, Nifty extend gains to 3rd day, Q4 results to guide stock-specific action",
+      "impact_text": "Sentiment: BEARISH with 97% confidence.",
+      "sentiment_label": "bearish",
+      "sentiment_score": 0.9724,
+      "why": [],
+      "sectors": {},
+      "stocks": [],
+      "historical_context_nifty": "Last 8 EARNINGS events: down avg 2 pts (5 up, 3 down)",
+      "historical_context_banknifty": "",
+      "source": "Moneycontrol",
+      "url": "https://www.moneycontrol.com/news/local-markets/sensex-nifty-extend-gains-to-3rd-day-q4-results-to-guide-stock-specific-action_17530901.html",
+      "order_index": 0,
+      "_nifty_rel": 6,
+      "_banknifty_rel": 0
+    },
+    {
+      "id": "1",
+      "headline": "Sensex, Nifty gain for third day in a row; easing volatility to support bull trend",
+      "impact_text": "Sentiment: BULLISH with 95% confidence.",
+      "sentiment_label": "bullish",
+      "sentiment_score": 0.9461,
+      "why": [],
+      "sectors": {},
+      "stocks": [],
+      "historical_context_nifty": "",
+      "historical_context_banknifty": "",
+      "source": "Moneycontrol",
+      "url": "https://www.moneycontrol.com/news/local-markets/sensex-nifty-gain-for-third-daya-row-easing-volatility-to-support-bull-trend_17531821.html",
+      "order_index": 1,
+      "_nifty_rel": 6,
+      "_banknifty_rel": 0
+    },
+    {
+      "id": "2",
+      "headline": "Top 5 multi-cap funds with lowest expense ratios and highest long-term returns for investors to track",
+      "impact_text": "Sentiment: NEUTRAL with 88% confidence.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8849,
+      "why": [],
+      "sectors": {},
+      "stocks": [],
+      "historical_context_nifty": "",
+      "historical_context_banknifty": "",
+      "source": "Mint",
+      "url": "https://www.livemint.com/money/personal-finance/top-5-multi-cap-funds-with-lowest-expense-ratios-and-highest-long-term-returns-for-investors-to-track-11780115623613.html",
+      "order_index": 2,
+      "_nifty_rel": 2,
+      "_banknifty_rel": 0
+    },
+    {
+      "id": "3",
+      "headline": "Mid-day Mood | Cooling volatility sparks market rally, India VIX sees steepest fall in 4 years",
+      "impact_text": "Sentiment: BULLISH with 68% confidence.",
+      "sentiment_label": "bullish",
+      "sentiment_score": 0.6798,
+      "why": [],
+      "sectors": {},
+      "stocks": [],
+      "historical_context_nifty": "",
+      "historical_context_banknifty": "",
+      "source": "Moneycontrol",
+      "url": "https://www.moneycontrol.com/news/local-markets/mid-day-mood-|-cooling-volatility-sparks-market-rally-india-vix-sees-steepest-fall4-years_17531481.html",
+      "order_index": 3,
+      "_nifty_rel": 0,
+      "_banknifty_rel": 0
+    },
+    {
+      "id": "4",
+      "headline": "A guide to government securities for retail investors: Meaning, ways to invest, benefits and risks",
+      "impact_text": "Sentiment: NEUTRAL with 95% confidence.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9503,
+      "why": [
+        "RBI is India's central bank",
+        "When RBI HIKES the REPO RATE \u2192 it becomes MORE EXPENSIVE for banks to borrow",
+        "Higher cost for banks \u2192 they increase loan interest rates for customers",
+        "More expensive EMIs \u2192 you borrow less for houses, cars, and businesses",
+        "Less borrowing \u2192 less spending \u2192 companies earn less profit",
+        "Company profits fall \u2192 stock market goes DOWN \ud83d\udcc9"
+      ],
+      "sectors": {
+        "Banking": "\u2b50 Direct: may benefit from higher NIMs but loan growth slows",
+        "Auto": "\ud83d\udd34 Negative: expensive car loans reduce demand",
+        "Real Estate": "\ud83d\udd34 Negative: high home loan rates reduce buying"
+      },
+      "stocks": [
+        "HDFCBANK",
+        "ICICIBANK",
+        "SBIN",
+        "MARUTI",
+        "BAJFINANCE"
+      ],
+      "historical_context_nifty": "",
+      "historical_context_banknifty": "",
+      "source": "Mint",
+      "url": "https://www.livemint.com/money/personal-finance/a-guide-to-government-securities-for-retail-investors-meaning-ways-to-invest-benefits-and-risks-11780585119084.html",
+      "order_index": 4,
+      "_nifty_rel": 0,
+      "_banknifty_rel": 0
+    }
+  ],
+  "items_banknifty": [
+    {
+      "id": "0",
+      "headline": "Sensex, Nifty extend gains to 3rd day, Q4 results to guide stock-specific action",
+      "impact_text": "Sentiment: BEARISH with 97% confidence.",
+      "sentiment_label": "bearish",
+      "sentiment_score": 0.9724,
+      "why": [],
+      "sectors": {},
+      "stocks": [],
+      "historical_context_nifty": "",
+      "historical_context_banknifty": "Last 8 EARNINGS events: down avg 12 pts (5 up, 3 down)",
+      "source": "Moneycontrol",
+      "url": "https://www.moneycontrol.com/news/local-markets/sensex-nifty-extend-gains-to-3rd-day-q4-results-to-guide-stock-specific-action_17530901.html",
+      "order_index": 0,
+      "_nifty_rel": 6,
+      "_banknifty_rel": 0
+    },
+    {
+      "id": "1",
+      "headline": "Sensex, Nifty gain for third day in a row; easing volatility to support bull trend",
+      "impact_text": "Sentiment: BULLISH with 95% confidence.",
+      "sentiment_label": "bullish",
+      "sentiment_score": 0.9461,
+      "why": [],
+      "sectors": {},
+      "stocks": [],
+      "historical_context_nifty": "",
+      "historical_context_banknifty": "",
+      "source": "Moneycontrol",
+      "url": "https://www.moneycontrol.com/news/local-markets/sensex-nifty-gain-for-third-daya-row-easing-volatility-to-support-bull-trend_17531821.html",
+      "order_index": 1,
+      "_nifty_rel": 6,
+      "_banknifty_rel": 0
+    },
+    {
+      "id": "2",
+      "headline": "A guide to government securities for retail investors: Meaning, ways to invest, benefits and risks",
+      "impact_text": "Sentiment: NEUTRAL with 95% confidence.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9503,
+      "why": [
+        "RBI is India's central bank",
+        "When RBI HIKES the REPO RATE \u2192 it becomes MORE EXPENSIVE for banks to borrow",
+        "Higher cost for banks \u2192 they increase loan interest rates for customers",
+        "More expensive EMIs \u2192 you borrow less for houses, cars, and businesses",
+        "Less borrowing \u2192 less spending \u2192 companies earn less profit",
+        "Company profits fall \u2192 stock market goes DOWN \ud83d\udcc9"
+      ],
+      "sectors": {
+        "Banking": "\u2b50 Direct: may benefit from higher NIMs but loan growth slows",
+        "Auto": "\ud83d\udd34 Negative: expensive car loans reduce demand",
+        "Real Estate": "\ud83d\udd34 Negative: high home loan rates reduce buying"
+      },
+      "stocks": [
+        "HDFCBANK",
+        "ICICIBANK",
+        "SBIN",
+        "MARUTI",
+        "BAJFINANCE"
+      ],
+      "historical_context_nifty": "",
+      "historical_context_banknifty": "",
+      "source": "Mint",
+      "url": "https://www.livemint.com/money/personal-finance/a-guide-to-government-securities-for-retail-investors-meaning-ways-to-invest-benefits-and-risks-11780585119084.html",
+      "order_index": 2,
+      "_nifty_rel": 0,
+      "_banknifty_rel": 0
+    },
+    {
+      "id": "3",
+      "headline": "Direct vs regular mutual funds: Meaning, key differences and which one to choose",
+      "impact_text": "Sentiment: NEUTRAL with 95% confidence.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9488,
+      "why": [],
+      "sectors": {},
+      "stocks": [],
+      "historical_context_nifty": "",
+      "historical_context_banknifty": "",
+      "source": "Mint",
+      "url": "https://www.livemint.com/money/personal-finance/direct-vs-regular-mutual-funds-meaning-key-differences-and-which-one-to-choose-11780891284507.html",
+      "order_index": 3,
+      "_nifty_rel": 0,
+      "_banknifty_rel": 0
+    },
+    {
+      "id": "4",
+      "headline": "Top 5 multi-cap funds with lowest expense ratios and highest long-term returns for investors to track",
+      "impact_text": "Sentiment: NEUTRAL with 88% confidence.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8849,
+      "why": [],
+      "sectors": {},
+      "stocks": [],
+      "historical_context_nifty": "",
+      "historical_context_banknifty": "",
+      "source": "Mint",
+      "url": "https://www.livemint.com/money/personal-finance/top-5-multi-cap-funds-with-lowest-expense-ratios-and-highest-long-term-returns-for-investors-to-track-11780115623613.html",
+      "order_index": 4,
+      "_nifty_rel": 2,
+      "_banknifty_rel": 0
+    }
+  ],
+  "key_levels_nifty": {
+    "support": 205,
+    "resistance": 121,
+    "pcr": 2.0,
+    "fii_cr": 0
+  },
+  "key_levels_banknifty": {
+    "support": 205,
+    "resistance": 121,
+    "pcr": 2.0,
+    "fii_cr": 0
+  },
+  "index_sentiments": {
+    "nifty": {
+      "sentiment": "neutral",
+      "score": 0.049,
+      "article_count": 6
+    },
+    "banknifty": {
+      "sentiment": "neutral",
+      "score": 0.0,
+      "article_count": 1
+    }
+  }
 }

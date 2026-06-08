@@ -34,12 +34,19 @@ export interface Brief {
   key_levels?: KeyLevels
   key_levels_nifty?: KeyLevels
   key_levels_banknifty?: KeyLevels
-  accuracy?: {
-    recent: number
-    total: number
-    last_10: string
-  }
-  trade_action?: string
+  accuracy?: { recent: number; total: number; last_10: string }
+
+  // Per-index data
+  sentiment_nifty: 'bullish' | 'bearish' | 'neutral'
+  sentiment_banknifty: 'bullish' | 'bearish' | 'neutral'
+  score_nifty?: number
+  score_banknifty?: number
+  summary_nifty?: string
+  summary_banknifty?: string
+  trade_action_nifty?: string
+  trade_action_banknifty?: string
+  items_nifty?: BriefItem[]
+  items_banknifty?: BriefItem[]
 }
 
 export interface GlobalMarketPulse {

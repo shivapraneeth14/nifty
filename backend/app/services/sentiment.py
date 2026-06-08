@@ -140,3 +140,70 @@ def get_overall_sentiment(articles: list[dict]) -> str:
     elif avg < -0.1:
         return "bearish"
     return "neutral"
+
+
+NIFTY_KEYWORDS = ["nifty", "sensex", "index", "market", "fii", "dii", "benchmark", "bse", "nse", "mid-cap", "large-cap"]
+BANKNIFTY_KEYWORDS = ["bank nifty", "banknifty", "banking", "bank", "hdfc bank", "icici bank", "sbi", "pnb", "axis bank",
+                      "kotak", "private bank", "public sector bank", "nbfc", "financial"]
+
+
+def _index_relevance(text: str) -> tuple[float, float]:
+    """Return (nifty_relevance, banknifty_relevance) scores for an article."""
+    t = text.lower()
+    nifty_score = sum(2 if kw in t else 0 for kw in NIFTY_KEYWORDS)
+    banknifty_score = sum(2 if kw in t else 0 for kw in BANKNIFTY_KEYWORDS)
+    # Boost if the article explicitly names an index
+    if "nifty 50" in t or "sensex" in t:
+        nifty_score += 5
+    if "bank nifty" in t or "banknifty" in t:
+        banknifty_score += 5
+    # Cap at 10
+    return (min(nifty_score, 10), min(banknifty_score, 10))
+
+
+def get_index_sentiments(articles: list[dict]) -> dict:
+    """Calculate separate sentiment scores for Nifty 50 and Bank Nifty.
+
+    Each article contributes to an index's score proportional to its relevance.
+    Returns:
+        {
+            "nifty": {"sentiment": "bullish", "score": 0.32, "article_count": 8},
+            "banknifty": {"sentiment": "bearish", "score": -0.15, "article_count": 5},
+        }
+    """
+    nifty_weighted_sum = 0.0
+    nifty_total_weight = 0.0
+    nifty_count = 0
+    banknifty_weighted_sum = 0.0
+    banknifty_total_weight = 0.0
+    banknifty_count = 0
+
+    for a in articles:
+        label = a.get("sentiment_label", "neutral")
+        score = a.get("sentiment_score", 0.5)
+        title = a.get("title", "")
+        body = a.get("body", "")
+        text = f"{title} {body}"
+
+        signed = score if label == "bullish" else -score if label == "bearish" else 0
+        nifty_rel, banknifty_rel = _index_relevance(text)
+
+        if nifty_rel > 0:
+            nifty_weighted_sum += signed * nifty_rel
+            nifty_total_weight += nifty_rel
+            nifty_count += 1
+        if banknifty_rel > 0:
+            banknifty_weighted_sum += signed * banknifty_rel
+            banknifty_total_weight += banknifty_rel
+            banknifty_count += 1
+
+    def to_label(val):
+        return "bullish" if val > 0.1 else "bearish" if val < -0.1 else "neutral"
+
+    nifty_avg = round(nifty_weighted_sum / nifty_total_weight, 3) if nifty_total_weight > 0 else 0
+    banknifty_avg = round(banknifty_weighted_sum / banknifty_total_weight, 3) if banknifty_total_weight > 0 else 0
+
+    return {
+        "nifty": {"sentiment": to_label(nifty_avg), "score": nifty_avg, "article_count": nifty_count},
+        "banknifty": {"sentiment": to_label(banknifty_avg), "score": banknifty_avg, "article_count": banknifty_count},
+    }

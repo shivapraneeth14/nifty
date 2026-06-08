@@ -7,11 +7,7 @@ import StockChips from './StockChips'
 import HistoricalBar from './HistoricalBar'
 import type { BriefItem } from '../../types/brief'
 
-interface Props {
-  item: BriefItem
-  briefId: string
-  index?: string
-}
+interface Props { item: BriefItem; briefId: string; index?: string }
 
 export default function BriefCard({ item, briefId, index = 'nifty' }: Props) {
   const isNifty = index === 'nifty'
@@ -30,17 +26,11 @@ export default function BriefCard({ item, briefId, index = 'nifty' }: Props) {
         <h3 className="font-semibold text-sm leading-snug text-gray-900 dark:text-gray-100">{item.headline}</h3>
         <SentimentBadge label={item.sentiment_label} score={item.sentiment_score} />
       </div>
-
       <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{item.impact_text}</p>
-
       <WhySection reasons={item.why || []} />
       <SectorChips sectors={(item.sectors || {}) as Record<string, string>} />
       <StockChips stocks={(item.stocks || []) as string[]} />
-
-      {histContext && (
-        <HistoricalBar text={histContext} />
-      )}
-
+      {histContext && <HistoricalBar text={histContext} />}
       <div className="flex items-center justify-between pt-1 text-[10px] text-gray-400 dark:text-gray-500">
         <span className="font-medium">{item.source}</span>
         <FeedbackButtons briefId={briefId} articleId={item.article_id || undefined} />
