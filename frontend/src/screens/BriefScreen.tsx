@@ -30,7 +30,11 @@ export default function BriefScreen() {
   if (error) return <ErrorState message={error} onRetry={refetch} />
   if (!brief || !brief.items?.length) return <EmptyState icon="📭" message="No brief yet for today" submessage="Check back around 8:45 AM" />
 
-  const histSummary = index === 'nifty' ? brief.historical_summary_nifty : brief.historical_summary_banknifty
+  const isNifty = index === 'nifty'
+  const histSummary = isNifty ? brief.historical_summary_nifty : brief.historical_summary_banknifty
+  const keyLevels = isNifty ? (brief.key_levels_nifty || brief.key_levels) : (brief.key_levels_banknifty || brief.key_levels)
+  const indexLabel = isNifty ? 'Nifty' : 'BankNifty'
+  const indexEmoji = isNifty ? '📈' : '🏦'
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4 pb-24">
@@ -57,14 +61,14 @@ export default function BriefScreen() {
 
       {histSummary && (
         <div className="text-xs text-indigo-500 bg-indigo-500/5 border border-indigo-500/10 rounded-xl px-3 py-2">
-          📊 {index === 'nifty' ? 'Nifty' : 'BankNifty'} historical context: {histSummary}
+          {indexEmoji} {indexLabel} historical context: {histSummary}
         </div>
       )}
 
       <GlobalMarketPulse />
       <SentimentMeter nifty={0.2} banknifty={0.1} overall={brief.overall_sentiment} />
 
-      {brief.key_levels && <KeyLevelsPanel levels={brief.key_levels} />}
+      {keyLevels && <KeyLevelsPanel levels={keyLevels} index={indexLabel} />}
 
       <FiiPanel />
       <OptionChainCard />

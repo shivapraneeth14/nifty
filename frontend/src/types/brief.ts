@@ -5,6 +5,8 @@ export interface BriefItem {
   headline: string
   impact_text: string
   historical_context: string
+  historical_context_nifty?: string
+  historical_context_banknifty?: string
   why?: string[]
   sectors?: Record<string, string>
   stocks?: string[]
@@ -18,8 +20,6 @@ export interface BriefItem {
 export interface KeyLevels {
   support: number | null
   resistance: number | null
-  pcr: number | null
-  fii_cr: number | null
 }
 
 export interface Brief {
@@ -32,6 +32,8 @@ export interface Brief {
   historical_summary_nifty: string
   historical_summary_banknifty: string
   key_levels?: KeyLevels
+  key_levels_nifty?: KeyLevels
+  key_levels_banknifty?: KeyLevels
 }
 
 export interface GlobalMarketPulse {

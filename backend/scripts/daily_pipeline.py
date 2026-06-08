@@ -196,6 +196,7 @@ def run_pipeline():
             "sectors": a.get("sectors", {}),
             "stocks": a.get("stocks", []),
             "historical_context": "",
+            "historical_context_banknifty": "",
             "source": a.get("source", ""),
             "url": a.get("url", ""),
             "order_index": i,
@@ -225,6 +226,7 @@ def run_pipeline():
 
             if items:
                 items[0]["historical_context"] = hist_summary_nifty
+                items[0]["historical_context_banknifty"] = hist_summary_banknifty
         except Exception:
             pass
 
